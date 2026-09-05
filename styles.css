@@ -1,0 +1,508 @@
+/* ================================================================
+   PROTOCOLO ENCÍA SANA — LANDING PAGE
+   CSS puro, mobile-first. Sin frameworks, sin dependencias pesadas.
+   Índice:
+   1. Reset & variables (design tokens)
+   2. Base / tipografía
+   3. Layout utilitario (container, secciones)
+   4. Componentes (botones, badges, placeholders de imagen)
+   5. Topbar
+   6. Hero
+   7. Problema (agitación)
+   8. Enemigo común (anestesia/costos)
+   9. Revelación del mecanismo
+   10. Respaldo científico
+   11. Cómo funciona
+   12. Beneficios
+   13. Oferta
+   14. FAQ
+   15. CTA final
+   16. Footer
+   17. Sticky CTA (móvil)
+   18. Accesibilidad / reduced motion
+   19. Breakpoints mayores
+================================================================= */
+
+/* ================= 1. RESET & VARIABLES ================= */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body, h1, h2, h3, p, ul, ol, li, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+:root {
+  /* Color: paleta de confianza y salud */
+  --color-bg:          #FAF8F3; /* fondo principal, beige muy claro */
+  --color-bg-soft:     #F1EBDD; /* fondo de secciones alternas */
+  --color-surface:     #FFFFFF; /* tarjetas */
+  --color-forest:      #33513E; /* verde salvia/bosque — primario */
+  --color-forest-dark: #22362A; /* verde oscuro para headlines/footer */
+  --color-sage-tint:   #E4EBE2; /* fondo suave para badges verdes */
+  --color-navy:        #1D3B4A; /* azul petróleo — secundario */
+  --color-navy-tint:   #E4ECEE; /* fondo suave para badges azules */
+  --color-coral:       #C85A2E; /* acento cálido — SOLO botones CTA */
+  --color-coral-dark:  #A6461F; /* hover del CTA */
+  --color-text:        #2B2E2A; /* texto principal, gris carbón */
+  --color-text-soft:   #5B6259; /* texto secundario */
+  --color-border:      #E4DECD; /* bordes sutiles */
+
+  /* Tipografía */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Layout */
+  --container-w: 1120px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-soft: 0 20px 45px -20px rgba(34, 54, 42, 0.35);
+}
+
+/* ================= 2. BASE / TIPOGRAFÍA ================= */
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--color-forest-dark);
+  line-height: 1.18;
+  font-weight: 700;
+}
+
+p { color: var(--color-text); }
+
+.section__title {
+  font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+  max-width: 34ch;
+  margin-bottom: 1.5rem;
+}
+.section__title--center { max-width: none; margin-inline: auto; text-align: center; }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-bottom: 0.6rem;
+}
+.eyebrow--center { text-align: center; }
+
+/* Foco visible para accesibilidad de teclado */
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--color-navy);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================= 3. LAYOUT UTILITARIO ================= */
+.container {
+  max-width: var(--container-w);
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+.section {
+  padding-block: 56px;
+}
+.section--alt { background: var(--color-bg-soft); }
+
+/* ================= 4. COMPONENTES ================= */
+
+/* Botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 17px 30px;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-align: center;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn--cta {
+  background: var(--color-coral);
+  color: #FFFFFF;
+  box-shadow: 0 14px 28px -10px rgba(200, 90, 46, 0.55);
+}
+.btn--cta:hover { background: var(--color-coral-dark); transform: translateY(-2px); }
+.btn--cta:active { transform: translateY(0); }
+.btn--block { width: 100%; }
+
+/* Badges con ícono */
+.icon-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.icon-badge svg { width: 26px; height: 26px; }
+.icon-badge--navy   { background: var(--color-navy-tint); color: var(--color-navy); }
+.icon-badge--forest { background: var(--color-sage-tint); color: var(--color-forest); }
+
+/* Placeholders de imagen: reemplazar por <img> reales más adelante */
+.img-placeholder {
+  background: var(--color-bg-soft);
+  border: 1.5px dashed #A9BCAA;
+  border-radius: var(--radius-md);
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  color: var(--color-text-soft);
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.img-placeholder span {
+  display: block;
+  margin-top: 8px;
+  font-weight: 400;
+  font-size: 0.78rem;
+}
+.img-placeholder--hero { aspect-ratio: 4 / 5; min-height: 320px; }
+.img-placeholder--seal {
+  width: 130px;
+  height: 130px;
+  min-height: unset;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-inline: auto;
+  padding: 12px;
+}
+
+/* ================= 5. TOPBAR ================= */
+.topbar {
+  padding-block: 18px;
+  background: var(--color-bg);
+}
+.topbar__brand {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--color-forest-dark);
+}
+
+/* ================= 6. HERO ================= */
+.hero { padding-block: 20px 48px; position: relative; overflow: hidden; }
+
+.hero__grid {
+  display: grid;
+  gap: 36px;
+}
+
+.hero__content { position: relative; z-index: 1; }
+
+.hero__title {
+  font-size: clamp(1.9rem, 7vw, 2.6rem);
+  margin-bottom: 18px;
+}
+
+.hero__subtitle {
+  font-size: 1.08rem;
+  color: var(--color-text-soft);
+  max-width: 54ch;
+  margin-bottom: 26px;
+}
+
+.hero__microcopy {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+}
+
+.hero__media { position: relative; }
+
+.hero__blob {
+  position: absolute;
+  inset: -10% -10% auto auto;
+  width: 70%;
+  aspect-ratio: 1 / 1;
+  background: var(--color-sage-tint);
+  border-radius: 42% 58% 60% 40% / 45% 40% 60% 55%;
+  z-index: 0;
+}
+
+/* Un único momento animado: entrada suave del hero (no repetido en el resto de la página) */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__content { animation: fadeUp 0.7s ease both; }
+  .hero__media   { animation: fadeUp 0.8s ease 0.12s both; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= 7. PROBLEMA ================= */
+.problem__grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+.problem__card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 26px 22px;
+}
+.problem__card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.problem__card p { color: var(--color-text-soft); font-size: 0.98rem; }
+
+/* ================= 8. ENEMIGO COMÚN ================= */
+.enemy__grid { display: grid; gap: 30px; align-items: center; }
+.enemy__text p { margin-bottom: 16px; color: var(--color-text-soft); }
+.enemy__highlight {
+  color: var(--color-forest-dark) !important;
+  font-weight: 600;
+  font-size: 1.05rem;
+  border-left: 3px solid var(--color-forest);
+  padding-left: 16px;
+}
+
+/* ================= 9. REVELACIÓN ================= */
+.reveal__grid { display: grid; gap: 30px; align-items: center; }
+.reveal__text p { margin-bottom: 16px; color: var(--color-text-soft); }
+
+/* ================= 10. RESPALDO CIENTÍFICO ================= */
+.science__panel {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+  max-width: 780px;
+  margin-inline: auto;
+}
+.science__content p { margin-bottom: 14px; color: var(--color-text-soft); }
+.science__content strong { color: var(--color-forest-dark); font-size: 1.15em; }
+.science__note {
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+  border-top: 1px solid var(--color-border);
+  padding-top: 14px;
+  margin-top: 6px;
+}
+
+/* ================= 11. CÓMO FUNCIONA ================= */
+.steps__list { display: grid; gap: 26px; max-width: 640px; margin-inline: auto; }
+.steps__item { display: flex; gap: 18px; align-items: flex-start; }
+.steps__number {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-forest);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.steps__body h3 { font-size: 1.08rem; margin-bottom: 6px; }
+.steps__body p { color: var(--color-text-soft); font-size: 0.98rem; }
+
+/* ================= 12. BENEFICIOS ================= */
+.benefits__grid {
+  display: grid;
+  gap: 28px 24px;
+  grid-template-columns: 1fr;
+}
+.benefit {
+  border-left: 3px solid var(--color-forest);
+  padding-left: 18px;
+}
+.benefit .icon-badge { margin-bottom: 12px; }
+.benefit h3 { font-size: 1.05rem; margin-bottom: 6px; }
+.benefit p { color: var(--color-text-soft); font-size: 0.95rem; }
+
+/* ================= 13. OFERTA ================= */
+.offer__card {
+  background: var(--color-surface);
+  border-top: 6px solid var(--color-coral);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 40px 26px;
+  max-width: 620px;
+  margin-inline: auto;
+  text-align: center;
+}
+.offer__desc {
+  color: var(--color-text-soft);
+  max-width: 46ch;
+  margin: 0 auto 22px;
+}
+.offer__includes {
+  text-align: left;
+  max-width: 380px;
+  margin: 0 auto 28px;
+  display: grid;
+  gap: 10px;
+}
+.offer__includes li {
+  position: relative;
+  padding-left: 26px;
+  color: var(--color-text);
+  font-weight: 500;
+}
+.offer__includes li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-forest);
+}
+.offer__price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.offer__price-old {
+  font-size: 1.2rem;
+  color: var(--color-text-soft);
+  text-decoration: line-through;
+}
+.offer__price-new {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  color: var(--color-forest-dark);
+  font-weight: 700;
+}
+.offer__guarantee {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+}
+
+/* ================= 14. FAQ (details/summary nativos) ================= */
+.faq__list { max-width: 720px; margin-inline: auto; }
+.faq__item {
+  border-bottom: 1px solid var(--color-border);
+  padding-block: 18px;
+}
+.faq__item summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.02rem;
+  color: var(--color-forest-dark);
+  list-style: none;
+  position: relative;
+  padding-right: 32px;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: -2px;
+  font-size: 1.4rem;
+  color: var(--color-coral);
+  transition: transform 0.2s ease;
+}
+.faq__item[open] summary::after { transform: rotate(45deg); }
+.faq__item p {
+  margin-top: 12px;
+  color: var(--color-text-soft);
+}
+
+/* ================= 15. CTA FINAL ================= */
+.final-cta {
+  background: var(--color-navy);
+  padding-block: 64px;
+}
+.final-cta__inner { max-width: 620px; margin-inline: auto; text-align: center; }
+.final-cta h2 { color: #FFFFFF; font-size: clamp(1.5rem, 5vw, 2rem); margin-bottom: 14px; }
+.final-cta p { color: rgba(255, 255, 255, 0.82); margin-bottom: 28px; }
+
+/* ================= 16. FOOTER ================= */
+.footer {
+  background: var(--color-forest-dark);
+  color: rgba(255, 255, 255, 0.72);
+  padding-block: 32px;
+  font-size: 0.82rem;
+}
+.footer__inner { text-align: center; max-width: 620px; margin-inline: auto; }
+.footer__inner p { margin-bottom: 8px; }
+.footer__inner p:last-child { margin-bottom: 0; }
+
+/* ================= 17. STICKY CTA (solo móvil) ================= */
+.sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  background: var(--color-surface);
+  padding: 12px 16px;
+  box-shadow: 0 -10px 24px -12px rgba(34, 54, 42, 0.35);
+}
+/* Deja espacio para no tapar el footer con la barra fija */
+.footer { padding-bottom: calc(32px + 74px); }
+
+/* ================= 18. ACCESIBILIDAD / REDUCED MOTION ================= */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+/* ================= 19. BREAKPOINTS MAYORES ================= */
+@media (min-width: 640px) {
+  .container { padding-inline: 32px; }
+  .problem__grid { grid-template-columns: repeat(3, 1fr); }
+  .benefits__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 860px) {
+  .section { padding-block: 88px; }
+
+  .hero { padding-block: 56px 72px; }
+  .hero__grid {
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: 56px;
+  }
+
+  .enemy__grid { grid-template-columns: 1.1fr 0.9fr; }
+
+  .reveal__grid { grid-template-columns: 0.9fr 1.1fr; }
+
+  .science__panel { flex-direction: row; text-align: left; padding: 44px; }
+  .science__content p:first-child { margin-top: 0; }
+
+  .steps__list { max-width: 720px; }
+
+  .benefits__grid { grid-template-columns: repeat(3, 1fr); }
+
+  .footer { padding-bottom: 32px; } /* la barra sticky se oculta en desktop */
+}
+
+@media (min-width: 900px) {
+  .sticky-cta { display: none; } /* CTA fija solo tiene sentido en tráfico móvil */
+}
+
+@media (min-width: 1100px) {
+  .hero__title { font-size: 3rem; }
+}
