@@ -108,7 +108,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 
 .section {
-  padding-block: 56px;
+  padding-block: 30px;
 }
 .section--alt { background: var(--color-bg-soft); }
 
@@ -133,10 +133,43 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   background: var(--color-coral);
   color: #FFFFFF;
   box-shadow: 0 14px 28px -10px rgba(200, 90, 46, 0.55);
+  animation: cta-pulse 1.2s ease-in-out infinite;
+      display: block;
+    width: fit-content;
+    margin: 0 auto;
 }
-.btn--cta:hover { background: var(--color-coral-dark); transform: translateY(-2px); }
-.btn--cta:active { transform: translateY(0); }
-.btn--block { width: 100%; }
+
+.btn--cta:hover {
+  background: var(--color-coral-dark);
+  transform: translateY(-2px);
+}
+
+.btn--cta:active {
+  transform: translateY(0);
+}
+
+.hero__media img {
+  margin-bottom: 10px;
+}
+
+.hero__media .btn--cta {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+@keyframes cta-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+.btn--block {
+  width: 100%;
+}
 
 /* Badges con ícono */
 .icon-badge {
@@ -155,7 +188,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* Placeholders de imagen: reemplazar por <img> reales más adelante */
 .img-placeholder {
   background: var(--color-bg-soft);
-  border: 1.5px dashed #A9BCAA;
   border-radius: var(--radius-md);
   min-height: 260px;
   display: flex;
@@ -174,6 +206,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   margin-top: 8px;
   font-weight: 400;
   font-size: 0.78rem;
+}
+.img-placeholder--seal {
+  font-size: 3.8rem;
 }
 .img-placeholder--hero { aspect-ratio: 4 / 5; min-height: 320px; }
 .img-placeholder--seal {
@@ -198,11 +233,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 
 /* ================= 6. HERO ================= */
-.hero { padding-block: 20px 48px; position: relative; overflow: hidden; }
+.hero { padding-block: 20px 0px; position: relative; overflow: hidden; }
 
 .hero__grid {
   display: grid;
-  gap: 36px;
+  gap: 0px;
 }
 
 .hero__content { position: relative; z-index: 1; }
@@ -221,6 +256,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 
 .hero__microcopy {
   margin-top: 16px;
+  text-align: center;
   font-size: 0.85rem;
   color: var(--color-text-soft);
 }
@@ -263,7 +299,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .problem__card p { color: var(--color-text-soft); font-size: 0.98rem; }
 
 /* ================= 8. ENEMIGO COMÚN ================= */
-.enemy__grid { display: grid; gap: 30px; align-items: center; }
+.enemy__grid { 
+  display: grid; 
+  gap: 0px; 
+  align-items: start; 
+}
 .enemy__text p { margin-bottom: 16px; color: var(--color-text-soft); }
 .enemy__highlight {
   color: var(--color-forest-dark) !important;
@@ -274,7 +314,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 
 /* ================= 9. REVELACIÓN ================= */
-.reveal__grid { display: grid; gap: 30px; align-items: center; }
+.reveal__grid { display: grid; gap: 10px; align-items: center; }
 .reveal__text p { margin-bottom: 16px; color: var(--color-text-soft); }
 
 /* ================= 10. RESPALDO CIENTÍFICO ================= */
@@ -441,13 +481,23 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .footer {
   background: var(--color-forest-dark);
   color: rgba(255, 255, 255, 0.72);
-  padding-block: 32px;
+  padding: 10px 0 10px;
   font-size: 0.82rem;
 }
-.footer__inner { text-align: center; max-width: 620px; margin-inline: auto; }
-.footer__inner p { margin-bottom: 8px; }
-.footer__inner p:last-child { margin-bottom: 0; }
+.footer__inner { 
+  text-align: center; 
+  max-width: 620px; 
+  margin-inline: auto; 
+}
 
+.footer__inner p { 
+  margin-bottom: 8px;
+  color: #FFFFFF;
+}
+
+.footer__inner p:last-child { 
+  margin-bottom: 0; 
+}
 /* ================= 17. STICKY CTA (solo móvil) ================= */
 .sticky-cta {
   position: fixed;
@@ -460,7 +510,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   box-shadow: 0 -10px 24px -12px rgba(34, 54, 42, 0.35);
 }
 /* Deja espacio para no tapar el footer con la barra fija */
-.footer { padding-bottom: calc(32px + 74px); }
+.footer { 
+  padding-bottom: 10px; 
+}
 
 /* ================= 18. ACCESIBILIDAD / REDUCED MOTION ================= */
 @media (prefers-reduced-motion: reduce) {
@@ -482,7 +534,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   .hero__grid {
     grid-template-columns: 1.05fr 0.95fr;
     align-items: center;
-    gap: 56px;
+    gap: 0px;
   }
 
   .enemy__grid { grid-template-columns: 1.1fr 0.9fr; }
